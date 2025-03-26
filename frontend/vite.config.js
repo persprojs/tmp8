@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   esbuild: {
     loader: 'jsx',
     include: /src\/.*\.jsx?$/, // Process .js and .jsx files
@@ -10,5 +11,6 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    historyApiFallback: true,
   },
 });
