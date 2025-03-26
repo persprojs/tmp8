@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Banner from './components/Banner';
 import SidePanel from './components/SidePanel';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar.jsx';
 import { CartProvider } from './components/CartContext';
 import LoadingSpinner from './components/LoadingSpinner'; // Add a loading spinner component
 import './App.css';
