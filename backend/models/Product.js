@@ -1,3 +1,4 @@
+//adding a comment to trigger a build
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
