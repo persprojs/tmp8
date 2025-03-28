@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb+srv://sunilganotra:desiPwd1@cluster0.mongodb.net/?retryWrites=true&w=majority';
+const connectionString = 'mongodb://sunilganotra:desiPwd1@cluster0-shard-00-00.mongodb.net:27017,cluster0-shard-00-01.mongodb.net:27017,cluster0-shard-00-02.mongodb.net:27017/ecommerce?ssl=true&replicaSet=atlas-xxxx-shard-0&authSource=admin&retryWrites=true&w=majority';
+
 
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
