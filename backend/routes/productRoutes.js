@@ -23,8 +23,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Search route
-// Search route
-// Search route
 router.get('/products/search', async (req, res) => {
     try {
         const { q } = req.query;

@@ -53,5 +53,5 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   console.log('Try these test endpoints:');
   console.log(`- Local:  http://localhost:${PORT}/api/healthcheck`);
-  console.log(`- Render: https://your-render-backend.onrender.com/api/healthcheck`);
+  console.log(`- Render: https://tmp8-backend.onrender.com/api/healthcheck`); // updated
 });

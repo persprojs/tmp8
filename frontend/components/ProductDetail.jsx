@@ -20,7 +20,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const url = `${API_BASE_URL}/api/products/${id}`;
+        const url = `${API_BASE_URL}/products/${id}`;  // Updated endpoint
         console.log('Fetching product from:', url);
         console.log('Product ID:', id);
         const response = await axios.get(url);

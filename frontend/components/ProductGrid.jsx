@@ -12,7 +12,7 @@ const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
     console.log('Fetching products with category:', selectedCategory, 'and subcategory:', selectedSubcategory);
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/products`, {
+        const response = await axios.get(`${API_BASE_URL}/products`, {
           params: {
             category: selectedCategory,
             subcategory: selectedSubcategory,
@@ -38,7 +38,8 @@ const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
   );
 };
 
-export default ProductGrid; 
+export default ProductGrid;
+
 
 
 /* 16 Mar 25
