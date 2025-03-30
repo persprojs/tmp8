@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { CartContext } from './CartContext';
-import { API_BASE_URL } from '../config/config';
+import { API_URL_FINAL } from '../config/config'; // Updated import
 import '../assets/ProductList.css';
 
 const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "adel tinctures" }) => {
@@ -15,11 +15,11 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
   const [hoveredTooltip, setHoveredTooltip] = useState(false);
 
   // Debug: Log initial props
-  console.log(`[FRONTEND] Initial props - Category: ${selectedCategory}, Subcategory: ${selectedSubcategory}`);
+  console.log(`Initial props - Category: ${selectedCategory}, Subcategory: ${selectedSubcategory}`);
 
   // Reset page to 1 when category or subcategory changes
   useEffect(() => {
-    console.log(`[FRONTEND] Category/Subcategory changed. Resetting page to 1.`);
+    console.log(`Category/Subcategory changed. Resetting page to 1.`);
     setPage(1);
     setProducts([]);
     setTotalPages(1);
@@ -29,13 +29,12 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
   // Fetch products when page or category/subcategory changes
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(`[FRONTEND] Fetching products for page: ${page}, category: ${selectedCategory}, subcategory: ${selectedSubcategory}`);
+      console.log(`Fetching products for page: ${page}, category: ${selectedCategory}, subcategory: ${selectedSubcategory}`);
       setLoading(true);
       setError(null);
 
       try {
-        console.log(`[FRONTEND] API_BASE_URL: ${API_BASE_URL}`);
-        const response = await axios.get(`${API_BASE_URL}/products`, { // Updated endpoint
+        const response = await axios.get(`${API_URL_FINAL}/products`, { // Updated endpoint
           params: {
             page,
             limit: 100,
@@ -50,11 +49,11 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
 
         const { products: newProducts, totalPages: newTotalPages } = response.data;
 
-        console.log(`[FRONTEND] Fetched ${newProducts.length} products for page ${page}. Total pages: ${newTotalPages}`);
+        console.log(`Fetched ${newProducts.length} products for page ${page}. Total pages: ${newTotalPages}`);
         setProducts(newProducts);
         setTotalPages(newTotalPages);
       } catch (error) {
-        console.error('[FRONTEND] Error loading products:', error.message);
+        console.error('Error loading products:', error.message);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -67,10 +66,10 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
   // Handle page change
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      console.log(`[FRONTEND] Changing page from ${page} to ${newPage}`);
+      console.log(`Changing page from ${page} to ${newPage}`);
       setPage(newPage);
     } else {
-      console.log(`[FRONTEND] Invalid page change requested: ${newPage}`);
+      console.log(`Invalid page change requested: ${newPage}`);
     }
   };
 
@@ -98,8 +97,8 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
       {/* Product Grid */}
       <div className="product-grid">
         {products.map((product) => (
-          <div 
-            key={product._id} 
+          <div
+            key={product._id}
             className="product-card"
             onMouseEnter={() => setHoveredTooltip(true)}
             onMouseLeave={() => setHoveredTooltip(false)}

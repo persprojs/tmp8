@@ -1,39 +1,42 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { API_BASE_URL } from '../config/config';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { CartContext } from './CartContext';
+import { API_URL_FINAL } from '../config/config'; // Import API_URL_FINAL
 import '../assets/ProductGrid.css';
 
 const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log(`[FRONTEND] Fetching products with category: ${selectedCategory}, and subcategory: ${selectedSubcategory}`);
+    console.log('Fetching products with category:', selectedCategory, 'and subcategory:', selectedSubcategory);
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/products`, {
+        console.log('Fetching from:', `${API_URL_FINAL}/products`); // Debugging
+        const response = await axios.get(`${API_URL_FINAL}/products`, {
           params: {
             category: selectedCategory,
             subcategory: selectedSubcategory,
           },
         });
-        console.log(`[FRONTEND] Products fetched:`, response.data.products);  // Log products
+        console.log('Fetched products:', response.data.products);  // Log products
         setProducts(response.data.products);
       } catch (error) {
-        console.error('[FRONTEND] Error fetching products:', error);
+        console.error('Error fetching products:', error);
       }
     };
     fetchProducts();
   }, [selectedCategory, selectedSubcategory]);
 
   return (
-    <div>
+    <div className="container mt-4 product-grid-container">
       {products.map((product) => (
-        <div key={product._id}>
-          <h3>{product.Title}</h3>
-          <p>{product.Price}</p>
-        </div>
+        <Link key={product._id} to={`/product/${product._id}`} className="grid-item-link">
+          <div className="grid-item">
+            <img src={product.Images} alt={product.Title} />
+            <h3>{product.Title}</h3>
+            <p>${product.Price}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
