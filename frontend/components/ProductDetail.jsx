@@ -20,13 +20,12 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const url = `${API_BASE_URL}/products/${id}`;  // Updated endpoint
-        console.log('Fetching product from:', url);
-        console.log('Product ID:', id);
-        const response = await axios.get(url);
+        console.log(`[FRONTEND] Fetching product from: ${API_BASE_URL}/products/${id}`);
+        console.log(`[FRONTEND] Product ID: ${id}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${id}`);
         setProduct(response.data);
       } catch (error) {
-        console.error('Error fetching product:', error.response ? error.response.data : error.message);
+        console.error('[FRONTEND] Error fetching product:', error.response ? error.response.data : error.message);
       }
     };
 
@@ -183,5 +182,3 @@ const ProductDetail = () => {
     </div>
   );
 };
-
-export default ProductDetail;

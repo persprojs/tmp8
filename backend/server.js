@@ -12,10 +12,12 @@ console.log('MongoDB URI:', config.MONGODB_URI);
 console.log('Frontend URL:', config.FRONTEND_URL);
 
 // Middleware
+console.log('Setting up CORS with origin:', config.FRONTEND_URL);
 app.use(cors({ origin: config.FRONTEND_URL }));
 app.use(express.json());
 
 // Database connection with enhanced logging
+console.log('Attempting to connect to MongoDB...');
 mongoose.connect(config.MONGODB_URI)
   .then(() => {
     console.log('✅ MongoDB connected successfully');
@@ -40,6 +42,7 @@ console.log('Routes mounted at /api');
 
 // Add a test route
 app.get('/api/healthcheck', (req, res) => {
+  console.log('Health check endpoint hit');
   res.json({ 
     status: 'healthy',
     dbState: mongoose.connection.readyState,
@@ -53,5 +56,5 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   console.log('Try these test endpoints:');
   console.log(`- Local:  http://localhost:${PORT}/api/healthcheck`);
-  console.log(`- Render: https://tmp8-backend.onrender.com/api/healthcheck`); // updated
+  console.log(`- Render: https://tmp8-backend.onrender.com/api/healthcheck`);
 });
