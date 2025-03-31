@@ -13,7 +13,14 @@ console.log('Frontend URL:', config.FRONTEND_URL);
 
 // Middleware
 console.log('Setting up CORS with origin:', config.FRONTEND_URL);
-app.use(cors({ origin: config.FRONTEND_URL }));
+//app.use(cors({ origin: config.FRONTEND_URL }));
+// Enable CORS for all origins (or specify allowed origins)
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+}));
+
 app.use(express.json());
 
 // Database connection with enhanced logging
