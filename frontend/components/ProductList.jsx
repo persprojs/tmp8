@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { CartContext } from './CartContext';
-import { API_URL_FINAL } from '../config/config'; // Import API_URL_FINAL
+import { API_URL } from '../config/config'; // Import API_URL_FINAL
 import '../assets/ProductList.css';
 
 const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "adel tinctures" }) => {
@@ -35,9 +35,9 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
 
       try {
         // Log API_URL_FINAL to verify its value
-        console.log('API_URL:', API_URL_FINAL);
+        console.log('API_URL:', API_URL);
 
-        const response = await axios.get(`${API_URL_FINAL}/products`, {  // Use API_URL_FINAL
+        const response = await axios.get(`${API_URL}/products`, {  // Use API_URL_FINAL
           params: {
             page,
             limit: 100,

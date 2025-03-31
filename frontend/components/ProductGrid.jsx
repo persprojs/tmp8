@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { API_URL_FINAL } from '../config/config'; // Import API_URL_FINAL
+import { API_URL } from '../config/config'; // Import API_URL_FINAL
 import '../assets/ProductGrid.css';
 
 const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
@@ -11,8 +11,8 @@ const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
     console.log('Fetching products with category:', selectedCategory, 'and subcategory:', selectedSubcategory);
     const fetchProducts = async () => {
       try {
-        console.log('Fetching from:', `${API_URL_FINAL}/products`); // Debugging
-        const response = await axios.get(`${API_URL_FINAL}/products`, {
+        console.log('Fetching from:', `${API_URL}/products`); // Debugging
+        const response = await axios.get(`${API_URL}/products`, {
           params: {
             category: selectedCategory,
             subcategory: selectedSubcategory,
