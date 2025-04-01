@@ -2,8 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const Product = require('../models/Product');
-const mongoose = require('mongoose'); // Import mongoose for ObjectId validation
-const config = require('../config'); // Import config
+const mongoose = require('mongoose');
 const fs = require('fs');
 const csv = require('csv-parser');
 const path = require('path');
@@ -11,36 +10,20 @@ const path = require('path');
 // Configure Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(`Uploading file to 'uploads/' directory.`);
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    console.log(`Saving file with original name: ${file.originalname}`);
     cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
 
-// Add before your routes
-app.use((req, res, next) => {
+// Request logging middleware
+router.use((req, res, next) => {
   console.log(`Incoming ${req.method} request to ${req.originalUrl}`);
-  console.log('Headers:', req.headers);
   next();
 });
-
-// Add a test endpoint
-app.get('/api/debug', (req, res) => {
-  res.json({
-    message: "Debug endpoint",
-    headers: req.headers,
-    env: {
-      NODE_ENV: process.env.NODE_ENV,
-      FRONTEND_URL: process.env.FRONTEND_URL
-    }
-  });
-});
-
 
 
 // Search route

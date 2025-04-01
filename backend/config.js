@@ -5,7 +5,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
   MONGODB_URI: isProduction 
     ? process.env.MONGODB_URI 
-    : process.env.MONGODB_URI || 'mongodb://localhost:27017/tmp8',
+    : process.env.MONGODB_URI || 'mongodb://localhost:27017/',
   PORT: process.env.PORT || 3003,
   FRONTEND_URL: isProduction
     ? 'https://tmp8-frontend.vercel.app'
