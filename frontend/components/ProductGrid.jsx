@@ -8,26 +8,25 @@ const ProductGrid = ({ selectedCategory, selectedSubcategory }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    console.log('Fetching products with category:', selectedCategory, 'and subcategory:', selectedSubcategory);
     const fetchProducts = async () => {
       try {
-        console.log('Fetching from:', API_URL);
-        const response = await axios.get(API_URL, {
+        console.log('Fetching from:', `${API_URL}/products`); // Debugging
+        const response = await axios.get(`${API_URL}/products`, {
           params: {
             category: selectedCategory,
             subcategory: selectedSubcategory,
           },
         });
+        console.log('Fetched products:', response.data.products);  // Log products
         setProducts(response.data.products);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
-    
-    if (selectedCategory && selectedSubcategory) {
-      fetchProducts();
-    }
+    fetchProducts();
   }, [selectedCategory, selectedSubcategory]);
-  
+
   return (
     <div className="container mt-4 product-grid-container">
       {products.map((product) => (

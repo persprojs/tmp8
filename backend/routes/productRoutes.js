@@ -2,7 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const Product = require('../models/Product');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Import mongoose for ObjectId validation
+const config = require('../config'); // Import config
 const fs = require('fs');
 const csv = require('csv-parser');
 const path = require('path');
@@ -10,21 +11,16 @@ const path = require('path');
 // Configure Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log(`Uploading file to 'uploads/' directory.`);
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
+    console.log(`Saving file with original name: ${file.originalname}`);
     cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
-
-// Request logging middleware
-router.use((req, res, next) => {
-  console.log(`Incoming ${req.method} request to ${req.originalUrl}`);
-  next();
-});
-
 
 // Search route
 router.get('/products/search', async (req, res) => {

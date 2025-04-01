@@ -1,21 +1,8 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-const config = {
-  MONGODB_URI: isProduction 
-    ? process.env.MONGODB_URI 
-    : process.env.MONGODB_URI || 'mongodb://localhost:27017/',
+module.exports = {
   PORT: process.env.PORT || 3003,
-  FRONTEND_URL: isProduction
-    ? 'https://tmp8-frontend.vercel.app'
-    : 'http://localhost:5173',
-  API_PREFIX: '/api',
-  ALLOWED_ORIGINS: isProduction
-    ? ['https://tmp8-frontend.vercel.app']
-    : ['http://localhost:5173']
+  MONGODB_URI: process.env.MONGODB_URI || 'mongodb+srv://sunil:desiPwd1@cluster0.bxqtu5q.mongodb.net/productionDB?retryWrites=true&w=majority', // Added productionDB
+  FRONTEND_URL: process.env.FRONTEND_URL
 };
-
-console.log('Config loaded:', config);
-
-module.exports = config;
