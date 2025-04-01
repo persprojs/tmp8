@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { CartContext } from './CartContext';
 import { Button } from 'react-bootstrap';
-import { API_URL_FINAL } from '../config/config'; // Import API_URL_FINAL
+import { API_URL } from '../config/config'; // Import API_URL_FINAL
 import '../assets/ProductDetail.css';
 
 const ProductDetail = () => {
@@ -13,24 +13,24 @@ const ProductDetail = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    window.scrollTo(0, 150);
-  }, [id]);
-
-  useEffect(() => {
     const fetchProduct = async () => {
       try {
-        console.log('Fetching product from:', `${API_URL_FINAL}/products/${id}`); // Debugging
-        console.log('Product ID:', id);
-        const response = await axios.get(`${API_URL_FINAL}/products/${id}`);
+        console.log('Fetching product from:', `${API_URL}/${id}`);
+        const response = await axios.get(`${API_URL}/${id}`);
         setProduct(response.data);
       } catch (error) {
-        console.error('Error fetching product:', error.response ? error.response.data : error.message);
+        console.error('Error fetching product:', error);
+        if (error.response) {
+          console.error('Response data:', error.response.data);
+          console.error('Response status:', error.response.status);
+          console.error('Response headers:', error.response.headers);
+        }
       }
     };
 
     fetchProduct();
   }, [id]);
-
+  
   const handleAddToCart = (variant, variantPrice) => {
     if (!product) return;
     const variantProduct = {

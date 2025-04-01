@@ -21,9 +21,6 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
   useEffect(() => {
     console.log(`Category/Subcategory changed. Resetting page to 1.`);
     setPage(1);
-    setProducts([]);
-    setTotalPages(1);
-    setError(null);
   }, [selectedCategory, selectedSubcategory]);
 
   // Fetch products when page or category/subcategory changes
@@ -34,10 +31,9 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
       setError(null);
 
       try {
-        // Log API_URL_FINAL to verify its value
         console.log('API_URL:', API_URL);
-
-        const response = await axios.get(`${API_URL}/products`, {  // Use API_URL_FINAL
+        
+        const response = await axios.get(API_URL, {  // Use API_URL directly as it already includes /api
           params: {
             page,
             limit: 100,
@@ -46,9 +42,7 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
           },
         });
 
-        if (response.status !== 200) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        console.log('Response:', response);
 
         const { products: newProducts, totalPages: newTotalPages } = response.data;
 
@@ -56,7 +50,7 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
         setProducts(newProducts);
         setTotalPages(newTotalPages);
       } catch (error) {
-        console.error('Error loading products:', error.message);
+        console.error('Error loading products:', error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -65,7 +59,6 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
 
     fetchProducts();
   }, [page, selectedCategory, selectedSubcategory]);
-
   // Handle page change
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
