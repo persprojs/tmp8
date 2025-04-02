@@ -3,45 +3,41 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config');
 const productRoutes = require('./routes/productRoutes');
+const mongoose = require('mongoose');
 
 const app = express();
 
-// Enhanced logging
-console.log('Starting server setup...');
-console.log('MongoDB URI:', config.MONGODB_URI);
-console.log('Frontend URL:', config.FRONTEND_URL);
-
-// Middleware
-console.log('Setting up CORS with origin:', config.FRONTEND_URL);
+/// Debug messages for initialization
+console.log('Backend Initialization:');
+console.log(`Environment: ${process.env.NODE_ENV}`);
+console.log(`MongoDB URI: ${config.MONGODB_URI}`);
+console.log(`Frontend URL: ${config.FRONTEND_URL}`);
+console.log(`API Prefix: ${config.API_PREFIX}`);
+console.log(`Port: ${config.PORT}`);
+console.log('Backend Initialization Complete');
 //app.use(cors({ origin: config.FRONTEND_URL }));
 // Enable CORS for all origins (or specify allowed origins)
+// CORS setup
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  origin: config.FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(express.json());
 
 // Database connection with enhanced logging
 console.log('Attempting to connect to MongoDB...');
+// MongoDB connection
 mongoose.connect(config.MONGODB_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected successfully');
-    
-    // Verify collection exists
-    mongoose.connection.db.listCollections({ name: 'products' }).next((err, collinfo) => {
-      if (collinfo) {
-        console.log('✔️ Products collection exists');
-      } else {
-        console.warn('❌ Products collection missing!');
-      }
+    .then(() => {
+        console.log('✅ MongoDB connected successfully');
+    })
+    .catch(err => {
+        console.error('❌ MongoDB connection failed:', err.message);
+        process.exit(1);
     });
-  })
-  .catch(err => {
-    console.error('❌ MongoDB connection failed:', err.message);
-    process.exit(1);
-  });
+
 
 // Route mounting with verification
 app.use('/api', productRoutes);
