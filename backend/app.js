@@ -4,24 +4,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const errorMiddleware = require('./middleware/error');
 const config = require('./config');
-const mongoose = require('mongoose');
 
 const app = express();
-// Debug messages for middleware setup
-console.log('Middleware Initialization:');
-console.log(`CORS allowed origins: ${config.FRONTEND_URL}`);
-console.log('Middleware Initialization Complete');
 
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-// CORS setup
-app.use(cors({
-  origin: config.FRONTEND_URL,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 // Route Imports
 const productRoutes = require('./routes/productRoutes');

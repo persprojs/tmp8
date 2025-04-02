@@ -1,11 +1,11 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const API_URL = `${API_BASE_URL}/api`;
+const isProduction = import.meta.env.PROD; // Vite automatically sets this
+export const API_BASE_URL = isProduction 
+  ? import.meta.env.VITE_API_BASE_URL 
+  : 'http://localhost:3003';
 
-// Debug logs
-console.group('Environment Configuration');
-console.log('Mode:', import.meta.env.MODE);
-console.log('API_BASE_URL:', API_BASE_URL);
-console.log('API_URL:', API_URL);
-console.groupEnd();
+export const API_URL = `${API_BASE_URL}/api`;
 
-export { API_BASE_URL, API_URL };
+// Debug logs (remove in production if desired)
+console.log(`Environment: ${isProduction ? 'Production' : 'Development'}`);
+console.log(`API_BASE_URL: ${API_BASE_URL}`);
+console.log(`API_URL: ${API_URL}`);
