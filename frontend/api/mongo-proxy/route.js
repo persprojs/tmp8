@@ -1,6 +1,16 @@
 export const runtime = 'edge';
 
-export default async function handler(request) {
+export default async function handler(request) {  
+  const headers = new Headers();  
+  headers.set('Access-Control-Allow-Origin', '*'); // Allow all origins
+  headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Allow these methods
+  headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow these headers
+
+  // Handle preflight requests
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers });
+  }
+
   // 1. Quick auth check (use the same key you set in Vercel)
   if (request.headers.get('x-auth-key') !== process.env.PROXY_AUTH_KEY) {
     return new Response('Unauthorized', { status: 401 });
