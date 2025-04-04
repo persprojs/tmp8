@@ -7,17 +7,13 @@ export default async function handler(request) {
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow these headers
 
   // Handle preflight requests
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers });
-  }
-
   // 1. Quick auth check (use the same key you set in Vercel)
   if (request.headers.get('x-auth-key') !== process.env.PROXY_AUTH_KEY) {
     return new Response('Unauthorized', { status: 401 });
   }
 
   // 2. Your exact Atlas connection string
-  const ATLAS_URI = 'mongodb+srv://sunil:desiPwd1@cluster0.bxqtu5q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+  const ATLAS_URI = 'mongodb+srv://sunil:desiPwd1@cluster0.bxqtu5q.mongodb.net/?retryWrites=true&w=majority';
 
   // 3. Forward request directly
   try {
