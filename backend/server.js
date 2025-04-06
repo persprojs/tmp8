@@ -15,10 +15,28 @@ console.log('Frontend URL:', config.FRONTEND_URL);
 console.log('Setting up CORS with origin:', config.FRONTEND_URL);
 //app.use(cors({ origin: config.FRONTEND_URL }));
 // Enable CORS for all origins (or specify allowed origins)
+/*
 app.use(cors({
-  origin: ['https://tmp8-frontend.vercel.app', 'http://localhost:5173'], // Allow requests from your frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+}));
+*/
+
+// In server.js
+const allowedOrigins = [
+  'https://www.naturalremedieshub.com',
+  'https://naturalremedieshub.com',
+  'https://tmp8-frontend.vercel.app',
+  'http://localhost:5173'
+];
+
+console.log('Setting up CORS with origin:', allowedOrigins);
+// Replace existing CORS middleware with:
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 app.use(express.json());
