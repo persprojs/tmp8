@@ -6,10 +6,12 @@ import SidePanel from '../components/SidePanel';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('homeopathy'); // Default to "homeopathy"
+  const [selectedSubcategory, setSelectedSubcategory] = useState('adel tinctures'); // Default to "adel tinctures"
 
   const handleCategoryChange = (category, subcategory) => {
+    console.log("Category changed to:", category);
+    console.log("Subcategory changed to:", subcategory);
     setSelectedCategory(category);
     setSelectedSubcategory(subcategory);
   };
@@ -24,7 +26,7 @@ const Home = () => {
             <SidePanel onCategoryChange={handleCategoryChange} />
           </Col>
           <Col md={9}>
-            <ProductGrid selectedCategory={"homeopathy"} selectedSubcategory={"adel tinctures"} />
+            <ProductGrid selectedCategory={selectedCategory} selectedSubcategory={selectedSubcategory} />
           </Col>
         </Row>
       </Container>
@@ -33,7 +35,6 @@ const Home = () => {
 };
 
 export default Home;
-
 /*16 Mar 25
 
 //src/pages/Home.jsx

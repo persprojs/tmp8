@@ -40,9 +40,9 @@ const ProductList = ({ selectedCategory = "homeopathy", selectedSubcategory = "a
         const response = await axios.get(`${API_URL}/products`, {  // Use API_URL_FINAL
           params: {
             page,
-            limit: 100,
-            category: selectedCategory,
-            subcategory: selectedSubcategory,
+            limit: 48,
+            category: selectedCategory || "homeopathy", // Ensure default value is used
+            subcategory: selectedSubcategory || "adel tinctures", // Ensure default value is used
           },
         });
 

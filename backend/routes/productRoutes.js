@@ -47,7 +47,7 @@ router.get('/products/search', async (req, res) => {
 
 // GET all products with pagination and filtering
 router.get('/products', async (req, res) => {
-  const { page = 1, limit = 100, category, subcategory } = req.query; // Set default limit to 100
+  const { page = 1, limit = 48, category, subcategory } = req.query; // Set default limit to 100
 
   console.log(`Received request for page ${page}, category: ${category}, subcategory: ${subcategory}`);
 
