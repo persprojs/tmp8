@@ -43,10 +43,10 @@ const SidePanel = ({ onCategorySelect }) => {
                 </li>
                 <ul className="submenu">
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'dr reckeweg tinctures'); }}>
-                    Dr Reckeweg Tinctures
+                    Tinctures
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'dr reckeweg tablets'); }}>
-                    Dr Reckeweg Tablets
+                    Tablets
                   </li>
                 </ul>
                 <li
@@ -60,7 +60,7 @@ const SidePanel = ({ onCategorySelect }) => {
                 </li>
                 <ul className="submenu">
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'adel tinctures'); }}>
-                    Adel Tinctures
+                    Tinctures
                   </li>
                 </ul>
                 <li
@@ -74,10 +74,10 @@ const SidePanel = ({ onCategorySelect }) => {
                 </li>
                 <ul className="submenu">
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'baksons tinctures'); }}>
-                    Baksons Tinctures
+                    Tinctures
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'baksons tablets'); }}>
-                    Baksons Tablets
+                    Tablets
                   </li>
                 </ul>
                 <li
@@ -91,16 +91,16 @@ const SidePanel = ({ onCategorySelect }) => {
                 </li>
                 <ul className="submenu">
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('homeopathy', 'sbl tinctures'); }}>
-                    Tinctures 100ML (Value Packs)
+                    Tinctures 100ML
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('sbl', 'sbl30mldrops'); }}>
                     Tinctures 30ML
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('sbl tabs', 'sbl'); }}>
-                    SBL Tabs 25gms
+                    Tabs 25gms
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('sbl450gmstabs', 'sbl'); }}>
-                    450gms Tabs
+                    Tabs 450gms 
                   </li>
                 </ul>
                 <li
@@ -114,10 +114,10 @@ const SidePanel = ({ onCategorySelect }) => {
                 </li>
                 <ul className="submenu">
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('Willmar', 'Willmar Tinctures'); }}>
-                    Willmar Tinctures
+                    Tinctures
                   </li>
                   <li onClick={(event) => { event.stopPropagation(); handleCategoryClick('Willmar', 'Willmar Tabs. MISC'); }}>
-                    Willmar Tabs., MISC
+                    Tabs., MISC
                   </li>
                 </ul>
               </ul>
