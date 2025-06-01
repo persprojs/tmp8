@@ -10,6 +10,10 @@
   padding: 15px; /* Add padding */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   position: relative;
+  /* Fix for SidePanel Flickering issue */
+  width: 270px; /* Remove !important */
+  min-width: 270px; /* Prevent collapse */
+  flex: 0 0 auto; /* Disable flex grow/shrink */
 }
 
 .categories-menu h5 {
