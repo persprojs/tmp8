@@ -16,7 +16,9 @@ const SidePanel = ({ onCategorySelect }) => {
   };
 
   return (
-    <div className="categories-menu ps-0">
+    // Wrap the entire SidePanel component in a fixed-width div
+    <div style={{ width: '270px', flexShrink: 0 }}> {/* Prevents flex shrinking */}
+     <div className="categories-menu ps-0">
       <h5>Categories</h5>
       <ListGroup>
         {/* Homeopathy Section */}
@@ -311,6 +313,7 @@ const SidePanel = ({ onCategorySelect }) => {
         </ListGroup.Item>
       </ListGroup>
     </div>
+    </div> /* Fix for SidePanel Flickering issue */
   );
 };
 
